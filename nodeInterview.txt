@@ -1,0 +1,47 @@
+Q1: Please Use react, nodejs & mongoDB:
+=================================
+1. Log-in Screen (No Registration Required. Create a direct Admin User into DB)
+2. DashBoard with Some Stats.
+3. Left Column
+	A. Flight Module
+	B. Room Module
+	C. Room Booking Module
+
+Flight Module:
+==============
+Add New Screen:
+
+Flight Number:
+Departure Date:
+Departure Time:
+Status: Active/Inactive
+
+List Flight Screen: Create a list with all the added flight with a Search Functionality by Flight Number and/or Date.
+
+Room Module:
+===========
+Add New Screen:
+
+Room Name:
+Room Code: Must be unique
+Capacity: 
+Gender: Male or Female
+Status: Active/Inactive
+
+Room Booking:
+=============
+Add New Booking Screen:
+
+Name:
+Email Address:
+Gender: Male or Female
+Select Flight:
+
+Note:
+After Flight selection, 
+A. Check-out date will display autometically. Rules is Flight Departure Date and Time - 6hrs.
+B. Available rooms will display based on the selected Gender, CheckIn Date (Entry Date) and CheckOut date time.
+
+Confirm Booking Button. Once clicked, the a new booking will be generated.
+
+List of Booking with a Search Functionality by Booking ID, User Email, Room and Date

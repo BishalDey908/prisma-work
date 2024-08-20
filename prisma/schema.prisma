@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model flight_module{
+flight_id              Int      @id @default(autoincrement())
+Flight_Number          String
+Departure_Date         Int      
+Departure_Time         Int
+Status                 String
+
+preBookings            preBookingWithflight_module[] // One-to-many relationship
+}
+
+
+model room_module{
+uniqueRoom_id       Int      @id @default(autoincrement())
+Room_Name           String
+Room_Code           Int      
+Capacity            Int
+Gender              String
+Status              String
+}
+
+
+
+model BookingWithflight_module {
+  uniqueBooking_id  Int      @id @default(autoincrement())
+  Name              String      
+  Email_Address     String   @unique
+  Gender            String
+  Select_Flight     String
+  createdAt         DateTime @default(now())
+  Flight_Number     Int
+
+  //join
+  flightId          Int
+  flight_module     flight_module  @relation(fields: [flightId], references: [flight_id])
+}
+
+model BookingWithflight_module{
+  uniqueBooking_id  Int      @id @default(autoincrement())
+  Name              String
+  Email_Address     String   @unique
+  Gender            String
+  createdAt         DateTime @default(now())
+}
+
+model preBookingWithroom_module {
+  uniqueBooking_id  Int      @id @default(autoincrement())
+  Name              String      
+  Email_Address     String   @unique
+  Gender            String
+  Select_Flight     String
+  createdAt         DateTime @default(now())
+  Room_Code         Int
+  // One-to-many relationship with preBookingWithroom_module
+  preBookings         preBookingWithroom_module[]    
+}
+
+model BookingWithroom_module {
+  uniqueBooking_id  Int      @id @default(autoincrement())
+  Name              String
+  Email_Address     String   @unique
+  Gender            String
+  Select_Flight     String
+  createdAt         DateTime @default(now())
+
+  // Relation Fields
+  roomId            Int
+  room_module       room_module  @relation(fields: [roomId], references: [uniqueRoom_id])
+
+  // You can remove Room_Code from this model since it's now part of the relationship
+}
+
